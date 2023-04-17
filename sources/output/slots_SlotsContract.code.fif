@@ -1,0 +1,813 @@
+ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib.fc` `D:\\Projects\\tact-template\
+ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib_ex.fc` `D:\\Projects\\tact-template\\sources\\output\\slots_SlotsContract.code.fc` 
+PROGRAM{
+  DECLPROC __tact_verify_address
+  DECLPROC __tact_load_address
+  DECLPROC __tact_store_address
+  DECLPROC __tact_my_balance
+  DECLPROC __tact_not_null
+  DECLPROC __tact_context_get
+  DECLPROC __tact_prepare_random
+  DECLPROC __tact_store_bool
+  DECLPROC __tact_address_eq
+  DECLPROC __tact_string_builder_start
+  DECLPROC __tact_string_builder_start_comment
+  DECLPROC __tact_string_builder_start_string
+  DECLPROC __tact_string_builder_end
+  DECLPROC __tact_string_builder_end_slice
+  DECLPROC __tact_string_builder_append
+  DECLPROC __gen_write_SlotsContract
+  DECLPROC __gen_read_SlotsContract
+  DECLPROC __gen_Context_get_sender
+  DECLPROC __gen_Data_to_external
+  DECLPROC __gen_read_$init$SlotsContract
+  DECLPROC $__gen_SlotsContract_init
+  DECLPROC __gen_load_SlotsContract
+  DECLPROC __gen_store_SlotsContract
+  DECLPROC $random
+  DECLPROC $send
+  DECLPROC $__gen_String_asComment
+  DECLPROC $__gen_SlotsContract_getSlotValue
+  DECLPROC $__gen_SlotsContract_getSlotType
+  DECLPROC __gen_constructor_Data$minAmount_maxAmount
+  DECLPROC $__gen_SlotsContract_get_data
+  78985 DECLMETHOD $__gen_get_get_data
+  DECLPROC __gen_constructor_SendParameters$to_value_mode_bounce_body
+  DECLPROC $__gen_SlotsContract_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4
+  DECLPROC __gen_constructor_SendParameters$to_value_bounce_body
+  DECLPROC $__gen_SlotsContract_receive
+  DECLPROC __gen_router_SlotsContract
+  DECLPROC recv_internal
+  113617 DECLMETHOD supported_interfaces
+  DECLPROC get_abi_ipfs
+  DECLPROC lazy_deployment_completed
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_context_sys
+  DECLGLOBVAR __tact_randomized
+  __tact_verify_address PROCINLINE:<{
+    DUP
+    SBITS
+    267 PUSHINT
+    EQUAL
+    136 THROWIFNOT
+    DUP
+    11 PLDU
+    DUP
+    10 PUSHPOW2
+    EQUAL
+    OVER
+    1279 PUSHINT
+    EQUAL
+    OR
+    136 THROWIFNOT
+    10 PUSHPOW2
+    EQUAL
+    137 THROWIFNOT
+  }>
+  __tact_load_address PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+    __tact_verify_address INLINECALLDICT
+  }>
+  __tact_store_address PROCINLINE:<{
+    __tact_verify_address INLINECALLDICT
+    STSLICER
+  }>
+  __tact_my_balance PROCINLINE:<{
+    BALANCE
+    FIRST
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_prepare_random PROCINLINE:<{
+    __tact_randomized GETGLOB
+    ISNULL
+    IF:<{
+      LTIME
+      ADDRAND
+      TRUE
+      __tact_randomized SETGLOB
+    }>
+  }>
+  __tact_store_bool PROCINLINE:<{
+    SWAP
+    1 STI
+  }>
+  __tact_address_eq PROCINLINE:<{
+    SDEQ
+  }>
+  __tact_string_builder_start PROCINLINE:<{
+    NIL
+    SWAP
+    TPUSH
+    PUSHNULL
+    TPUSH
+  }>
+  __tact_string_builder_start_comment PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    32 STU
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_start_string PROCINLINE:<{
+    NEWC
+    __tact_string_builder_start INLINECALLDICT
+  }>
+  __tact_string_builder_end PROCINLINE:<{
+    UNCONS
+    SWAP
+    ENDC
+    WHILE:<{
+      OVER
+      ISNULL
+      NOT
+    }>DO<{
+      SWAP
+      UNCONS
+      -ROT
+      STREF
+      ENDC
+    }>
+    NIP
+  }>
+  __tact_string_builder_end_slice PROCINLINE:<{
+    __tact_string_builder_end INLINECALLDICT
+    CTOS
+  }>
+  __tact_string_builder_append PROCREF:<{
+    DUP
+    SREFS
+    OVER
+    SBITS
+    WHILE:<{
+      DUP
+      0 GTINT
+      s2 PUSH
+      0 GTINT
+      OR
+    }>DO<{
+      s0 s3 XCHG
+      UNCONS
+      127 PUSHINT
+      s2 PUSH
+      BBITS
+      3 RSHIFT#
+      SUB
+      s0 s5 XCHG
+      3 RSHIFT#
+      s5 s5 XCPU
+      MIN
+      DUP
+      0 GTINT
+      IF:<{
+        DUP
+        3 LSHIFT#
+        s1 s5 XCHG
+        LDSLICEX
+        s3 s3 XCHG2
+        STSLICER
+        s0 s1 s4 XCHG3
+      }>
+      -ROT
+      CONS
+      s4 s1 PUSH2
+      SUB
+      0 GTINT
+      IF:<{
+        NEWC
+        SWAP
+        CONS
+        s4 s4 XCHG2
+        SUB
+        3 LSHIFT#
+      }>ELSE<{
+        NIP
+        s3 POP
+        0 GTINT
+        IF:<{
+          LDREF
+          DROP
+          CTOS
+          DUP
+          SREFS
+          OVER
+          SBITS
+        }>ELSE<{
+          0 PUSHINT
+          DUP
+        }>
+      }>
+    }>
+    3 BLKDROP
+  }>
+  __gen_write_SlotsContract PROCINLINE:<{
+    __tact_store_address INLINECALLDICT
+  }>
+  __gen_read_SlotsContract PROCINLINE:<{
+    __tact_load_address INLINECALLDICT
+  }>
+  __gen_Context_get_sender PROCINLINE:<{
+    s2 s3 XCHG
+    3 BLKDROP
+  }>
+  __gen_Data_to_external PROCINLINE:<{
+  }>
+  __gen_read_$init$SlotsContract PROCINLINE:<{
+    __tact_load_address INLINECALLDICT
+  }>
+  $__gen_SlotsContract_init PROCREF:<{
+  }>
+  __gen_load_SlotsContract PROCINLINE:<{
+    c4 PUSH
+    CTOS
+    LDREF
+    SWAP
+    __tact_context_sys SETGLOB
+    1 LDI
+    SWAP
+    IF:<{
+      __gen_read_SlotsContract INLINECALLDICT
+      NIP
+    }>ELSE<{
+      MYADDR
+      11 PLDU
+      10 PUSHPOW2
+      EQUAL
+      137 THROWIFNOT
+      __gen_read_$init$SlotsContract INLINECALLDICT
+      SWAP
+      ENDS
+      $__gen_SlotsContract_init INLINECALLDICT
+    }>
+  }>
+  __gen_store_SlotsContract PROCINLINE:<{
+    NEWC
+    __tact_context_sys GETGLOB
+    SWAP
+    STREF
+    TRUE
+    SWAP
+    1 STI
+    SWAP
+    __gen_write_SlotsContract INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $random PROCREF:<{
+    __tact_prepare_random INLINECALLDICT
+    OVER
+    SUB
+    RAND
+    ADD
+  }>
+  $send PROCREF:<{
+    NEWC
+    1 PUSHINT
+    SWAP
+    2 STI
+    s0 s7 XCHG2
+    __tact_store_bool INLINECALLDICT
+    0 PUSHINT
+    SWAP
+    3 STI
+    s0 s5 XCHG2
+    __tact_store_address INLINECALLDICT
+    s0 s3 XCHG2
+    STGRAMS
+    0 PUSHINT
+    SWAP
+    105 STI
+    s3 PUSH
+    ISNULL
+    NOT
+    s5 PUSH
+    ISNULL
+    NOT
+    OR
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      NEWC
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      ENDC
+      ROT
+      STREF
+    }>ELSE<{
+      s3 POP
+      s3 POP
+      SWAP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      SWAP
+      __tact_not_null INLINECALLDICT
+      SWAP
+      STREF
+    }>ELSE<{
+      NIP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    ENDC
+    SWAP
+    SENDRAWMSG
+  }>
+  $__gen_String_asComment PROCREF:<{
+    __tact_string_builder_start_comment INLINECALLDICT
+    SWAP
+    __tact_string_builder_append INLINECALLDICT
+    __tact_string_builder_end INLINECALLDICT
+  }>
+  $__gen_SlotsContract_getSlotValue PROCREF:<{
+    DUP
+    10 LESSINT
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8e5d27bd6a} B>boc <s PUSHSLICE
+    }>
+    DUP
+    9 GTINT
+    OVER
+    20 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8caa57868b} B>boc <s PUSHSLICE
+    }>
+    DUP
+    19 GTINT
+    OVER
+    30 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d89b64377be} B>boc <s PUSHSLICE
+    }>
+    DUP
+    29 GTINT
+    OVER
+    40 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8e5d27bd6a} B>boc <s PUSHSLICE
+    }>
+    DUP
+    39 GTINT
+    OVER
+    50 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8caa57868b} B>boc <s PUSHSLICE
+    }>
+    DUP
+    49 GTINT
+    OVER
+    60 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d89b64377be} B>boc <s PUSHSLICE
+    }>
+    DUP
+    59 GTINT
+    OVER
+    70 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8e5d27bd6a} B>boc <s PUSHSLICE
+    }>
+    DUP
+    69 GTINT
+    OVER
+    80 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d8caa57868b} B>boc <s PUSHSLICE
+    }>
+    DUP
+    79 GTINT
+    OVER
+    90 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      B{b5ee9c72410101010006000008f09f8d89b64377be} B>boc <s PUSHSLICE
+    }>
+    89 GTINT
+    IFJMP:<{
+      B{b5ee9c72410101010006000008f09f8d8e5d27bd6a} B>boc <s PUSHSLICE
+    }>
+    B{b5ee9c72410101010006000008f09f8d89b64377be} B>boc <s PUSHSLICE
+  }>
+  $__gen_SlotsContract_getSlotType PROCREF:<{
+    DUP
+    10 LESSINT
+    IFJMP:<{
+      DROP
+      1 PUSHINT
+    }>
+    DUP
+    9 GTINT
+    OVER
+    20 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      2 PUSHINT
+    }>
+    DUP
+    19 GTINT
+    OVER
+    30 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      3 PUSHINT
+    }>
+    DUP
+    29 GTINT
+    OVER
+    40 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      1 PUSHINT
+    }>
+    DUP
+    39 GTINT
+    OVER
+    50 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      2 PUSHINT
+    }>
+    DUP
+    49 GTINT
+    OVER
+    60 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      3 PUSHINT
+    }>
+    DUP
+    59 GTINT
+    OVER
+    70 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      1 PUSHINT
+    }>
+    DUP
+    69 GTINT
+    OVER
+    80 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      2 PUSHINT
+    }>
+    DUP
+    79 GTINT
+    OVER
+    90 LESSINT
+    AND
+    IFJMP:<{
+      DROP
+      3 PUSHINT
+    }>
+    89 GTINT
+    IFJMP:<{
+      1 PUSHINT
+    }>
+    3 PUSHINT
+  }>
+  __gen_constructor_Data$minAmount_maxAmount PROCINLINE:<{
+  }>
+  $__gen_SlotsContract_get_data PROCREF:<{
+    DROP
+    __tact_my_balance INLINECALLDICT
+    100000000 PUSHINT
+    SWAP
+    1 RSHIFT#
+    __gen_constructor_Data$minAmount_maxAmount INLINECALLDICT
+  }>
+  $__gen_get_get_data PROC:<{
+    __gen_load_SlotsContract INLINECALLDICT
+    $__gen_SlotsContract_get_data INLINECALLDICT
+    __gen_Data_to_external INLINECALLDICT
+  }>
+  __gen_constructor_SendParameters$to_value_mode_bounce_body PROCINLINE:<{
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+    PUSHNULL
+    PUSHNULL
+  }>
+  $__gen_SlotsContract_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4 PROCINLINE:<{
+    49280 PUSHINT
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    s2 s(-1) PUXC
+    __tact_address_eq INLINECALLDICT
+    THROWANYIFNOT
+    __tact_context_get INLINECALLDICT
+    __gen_Context_get_sender INLINECALLDICT
+    0 PUSHINT
+    130 PUSHINT
+    FALSE
+    B{b5ee9c7241010101000a0000105769746864726177ad26c282} B>boc <s PUSHSLICE
+    $__gen_String_asComment INLINECALLDICT
+    __gen_constructor_SendParameters$to_value_mode_bounce_body INLINECALLDICT
+    $send INLINECALLDICT
+  }>
+  __gen_constructor_SendParameters$to_value_bounce_body PROCINLINE:<{
+    s3 s3 s0 XCHG3
+    0 PUSHINT
+    SWAP
+    PUSHNULL
+    PUSHNULL
+  }>
+  $__gen_SlotsContract_receive PROCINLINE:<{
+    __tact_context_get INLINECALLDICT
+    DROP
+    s2 POP
+    OVER
+    __tact_my_balance INLINECALLDICT
+    1 RSHIFT#
+    100000000 PUSHINT
+    s4 PUSH
+    24690 PUSHINT
+    s0 s3 XCHG
+    LESS
+    s1 s2 XCHG
+    THROWANYIFNOT
+    s0 s3 XCHG
+    8124 PUSHINT
+    s0 s4 XCHG
+    GREATER
+    s1 s3 XCHG
+    THROWANYIFNOT
+    1 PUSHINT
+    100 PUSHINT
+    $random INLINECALLDICT
+    1 PUSHINT
+    100 PUSHINT
+    $random INLINECALLDICT
+    1 PUSHINT
+    100 PUSHINT
+    $random INLINECALLDICT
+    __tact_string_builder_start_string INLINECALLDICT
+    s6 s3 XCPU
+    $__gen_SlotsContract_getSlotValue INLINECALLDICT
+    s1 s7 XCHG
+    __tact_string_builder_append INLINECALLDICT
+    s6 s2 XCPU
+    $__gen_SlotsContract_getSlotValue INLINECALLDICT
+    s1 s7 XCHG
+    __tact_string_builder_append INLINECALLDICT
+    s6 s1 XCPU
+    $__gen_SlotsContract_getSlotValue INLINECALLDICT
+    s1 s7 XCHG
+    __tact_string_builder_append INLINECALLDICT
+    0 PUSHINT
+    B{b5ee9c7241010101000a000010596f752077696e21cd401aa2} B>boc <s PUSHSLICE
+    s8 s5 XCPU
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s5 XCPU
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s2 XCHG
+    EQUAL
+    s1 s4 XCPU
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s2 XCHG
+    EQUAL
+    IF:<{
+      NIP
+      s6 PUSH
+      1 LSHIFT#
+      SWAP
+    }>
+    s5 PUSH
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s5 XCPU
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s2 XCHG
+    EQUAL
+    IF:<{
+      NIP
+      s6 PUSH
+      15 MULCONST
+      10 PUSHINT
+      DIV
+      SWAP
+    }>
+    s0 s4 XCHG2
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s3 XCPU
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s2 XCHG
+    EQUAL
+    IF:<{
+      s3 POP
+      s5 PUSH
+      15 MULCONST
+      10 PUSHINT
+      DIV
+      s0 s3 XCHG
+    }>
+    s0 s4 XCHG2
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s0 s2 XCHG
+    $__gen_SlotsContract_getSlotType INLINECALLDICT
+    s1 s2 XCHG
+    EQUAL
+    IF:<{
+      NIP
+      s3 PUSH
+      15 MULCONST
+      10 PUSHINT
+      DIV
+      SWAP
+    }>
+    OVER
+    0 EQINT
+    IF:<{
+      NIP
+      s4 POP
+      s0 s2 XCHG
+      10 PUSHINT
+      DIV
+      B{b5ee9c7241010101000d000016596f75206c6f7374203a28e0efa2fb} B>boc <s PUSHSLICE
+      s0 s4 XCHG
+      s3 s3 XCHG2
+    }>ELSE<{
+      s4 POP
+    }>
+    FALSE
+    s0 s2 XCHG
+    __tact_string_builder_end_slice INLINECALLDICT
+    $__gen_String_asComment INLINECALLDICT
+    s3 PUSH
+    s3 s3 XCHG2
+    __gen_constructor_SendParameters$to_value_bounce_body INLINECALLDICT
+    $send INLINECALLDICT
+    10000000 PUSHINT
+    FALSE
+    s0 s4 XCHG
+    $__gen_String_asComment INLINECALLDICT
+    s1 s3 s0 XCHG3
+    s1 s4 XCHG
+    __gen_constructor_SendParameters$to_value_bounce_body INLINECALLDICT
+    $send INLINECALLDICT
+  }>
+  __gen_router_SlotsContract PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    0 PUSHINT
+    OVER
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      DUP
+      32 PLDU
+    }>
+    s0 s2 XCHG
+    IFJMP:<{
+      2DROP
+      TRUE
+    }>
+    OVER
+    0 EQINT
+    OVER
+    SBITS
+    33 LESSINT
+    AND
+    IFJMP:<{
+      2DROP
+      $__gen_SlotsContract_receive INLINECALLDICT
+      TRUE
+    }>
+    SWAP
+    0 EQINT
+    IF:<{
+      HASHSU
+      4214924782860224305093503934954653493962198591343413308822612294567774196964 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $__gen_SlotsContract_receive_comment_095190194aee611ce895c5503adf85fd864de7905746142f608d3eb2faad14e4 INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+    }>ELSE<{
+      DROP
+    }>
+    FALSE
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    4 LDU
+    SWAP
+    1 PUSHINT
+    AND
+    1 EQINT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      FALSE
+    }>
+    SWAP
+    LDMSGADDR
+    SWAP
+    __tact_verify_address INLINECALLDICT
+    s0 s4 s2 PUXCPU
+    s0 s3 XCHG
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    __gen_load_SlotsContract INLINECALLDICT
+    -ROT
+    __gen_router_SlotsContract INLINECALLDICT
+    DROP
+    __gen_store_SlotsContract INLINECALLDICT
+  }>
+  supported_interfaces PROC:<{
+    123515602279859691144772641439386770278 PUSHINT
+    209801025412363888721030803524359905849 PUSHINT
+    42980537499636128163026532310500881091 PUSHINT
+    209474421377847335869795010607481022628 PUSHINT
+  }>
+  get_abi_ipfs PROC:<{
+    x{697066733a2f2f516d56644d6946527233356955564850543770356b3774786d6d7656664e7474716d7442636e574a537a69466359} PUSHSLICE
+  }>
+  lazy_deployment_completed PROC:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+  }>
+}END>c
